@@ -1,25 +1,36 @@
-//b17.c
-//Kevin Hilt
-//CSC456
-//April 8, 2015
-//Purpose:  
-//
-//Compile:
-//          With makefile:
-//              make
-//
-//          Without makefile:
-//              gcc -g -Wall-o b17 b17.c
-//
-//Run:      ./b17 <prog.obj>
-//
-//              where <prog.obj> is the simulated object file
+/*/////////////////////////////////////////////////////////////////////////////
+b17.c
+Kevin Hilt
+CSC456
+April 8, 2015
+Purpose:  
+
+Compile:
+          With makefile:
+              make
+
+          Without makefile:
+              gcc -g -Wall-o b17 b17.c
+
+Run:      ./b17 <prog.obj>
+
+              where <prog.obj> is the simulated object file
+*//////////////////////////////////////////////////////////////////////////////
 
 #include "header.h"
 
-extern int MEMORY[MEMORY_SIZE];
+//Declare b17 architecture variables
+int MEMORY[MEMORY_SIZE]; //Main memory of the b17 --> 4096 24-bit numbers
+int MAR; //Memory address register --> 12 bits
+int* REGISTERS[4]; //Fout registers --> 12 bits each
+int A_BUS; //Address bus --> 12 bits
+int MDR; //Memory data register --> 24 bits
+int ACC; //Accumulator --> 24 bits
+int ALU; //Arithmetic-logic unit --> 24 bits
+int IR; //Instruction register --> 24 bits
+int D_BUS; //Data bus --> 24 bits
 
-//Author:   Kevin Hilt
+//Author: Kevin Hilt
 //Called when the program is run with an invalid number of command line
 //arguments
 void usage()
@@ -34,7 +45,7 @@ void usage()
 //Processes command line arguments and ...
 int main(int argc, char** argv)
 {
-    if(argc != 2)
+    if(argc != 2) //Invalid number of command line arguments
     {
         usage();
         return -1;
