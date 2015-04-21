@@ -26,6 +26,7 @@ int main(int argc, char* argv[])
 	int IR;
 	int DBUS;
 	int memory[4096];
+	int jump;
 
 	int instruction_number;
 	string instruction;
@@ -60,7 +61,7 @@ int main(int argc, char* argv[])
 
 		output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
 			<< setfill('0') << IR << " " << dec << instruction << " ";
-	
+		IC++;
 	
 		if(MAR == 1)
 		{
@@ -74,23 +75,47 @@ int main(int argc, char* argv[])
 				<< X0 << "] X1[" << setw( 3 ) << setfill( '0' ) << X1 << "] X2[" 
 				<< setw( 3 ) << setfill( '0' ) << X2 << "] X3[" << setw( 3 )
 				<< setfill( '0' ) << X3 << "]" << endl;
-
-		/*if(instruction == "HALT")
+		
+		if( instruction == "J" )
 		{
-			output <<  "Machine Halted - HALT instruction executed";
+			hex_to_int( to_string(MAR), jump);
+			IR = memory[jump];
+			IC = MAR;
 		}
-		else if(instruction == "?")
-		{
-			output <<  "Machine Halted - undefined opcode";
-		}
-		else if(instruction == "LDX" || "ADDX" || "STX" || "SUBX" || "EMX" || "CLRX")
-		{
-			output <<  "Machine Halted - unimplemented opcode";
-		}*/
-	
-		// need to add halt messages for address mode errors
 
 	}
+	get_instruction(IR, instruction);
+	get_address_mode(IR, MAR);
+
+	output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
+		<< setfill('0') << IR << " " << dec << instruction << " ";
+	IC++;
+
+	if(MAR == 1)
+	{
+		output << "IMM";
+	}
+	else
+		output << hex << MAR;
+
+		output << hex << " AC[" << setw( 6 )
+			<< setfill( '0' ) << AC << "] X0[" << setw( 3 ) << setfill( '0' )
+			<< X0 << "] X1[" << setw( 3 ) << setfill( '0' ) << X1 << "] X2[" 
+			<< setw( 3 ) << setfill( '0' ) << X2 << "] X3[" << setw( 3 )
+			<< setfill( '0' ) << X3 << "]" << endl;
+	if(instruction == "HALT")
+	{
+		output <<  "Machine Halted - HALT instruction executed";
+	}
+	else if(instruction == "?")
+	{
+		output <<  "Machine Halted - undefined opcode";
+	}
+	else if(instruction == "LDX" || "ADDX" || "STX" || "SUBX" || "EMX" || "CLRX")
+	{
+		output <<  "Machine Halted - unimplemented opcode";
+	}
+	// need to add halt messages for address mode errors
 	file.close();
 	output.close();
 }
@@ -131,11 +156,12 @@ void get_instruction(int IR, string &instruction)
 							 "?", "?", "?", "?",
 							 "?", "?", "?", "?"};
 	int value = ((IR >> 6 ) & 15);
-	int val2 = ((IR >> 10 ) & 15);
+	int val2 = ((IR >> 10 ) & 3);
 
 	hex_to_int(to_string(value), value);
+	cout << value << endl;
 	hex_to_int(to_string(val2), val2);
-
+	cout << val2 << endl;
 	instruction = in_set[value][val2];
 
 	cout << "value " << value << " Val2 " << val2 <<" in " << instruction << endl;
