@@ -47,8 +47,6 @@ int main(int argc, char* argv[])
 		get_address_mode(IR, ABUS, MAR);
 		match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
 
-        cout << "ABUS = " << ABUS << " MAR = " << MAR << "\n";
-
 		output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
 			<< setfill('0') << IR << " " << dec << left << setw(4) 
 			<< setfill(' ') << instruction << " ";
@@ -60,17 +58,18 @@ int main(int argc, char* argv[])
 		}
 		else if(ABUS != 0) //Illegal addressing mode
 		{
-			output << "???";
+			output << "??? ";
 		}
 		else if(MAR == 0)
 		{
-		    output << "    ";
+			output << "    ";
 		}
 		else
 			output << hex << left << setw(4) << setfill(' ') << MAR;
 	
+			AC = AC & 0xffffff;
 			output << hex << " AC[" << setw( 6 )
-				<< setfill( '0' ) << right << AC << "] X0[" << setw( 3 ) << setfill( '0' )
+				<< setfill( '0' ) << right << AC  << "] X0[" << setw( 3 ) << setfill( '0' )
 				<< X0 << "] X1[" << setw( 3 ) << setfill( '0' ) << X1 << "] X2[" 
 				<< setw( 3 ) << setfill( '0' ) << X2 << "] X3[" << setw( 3 )
 				<< setfill( '0' ) << X3 << "]" << endl;
@@ -82,6 +81,23 @@ int main(int argc, char* argv[])
 		else if(ABUS != 0  && ABUS != 1) //illegal addressing mode
 		{
 			address_error("illegal", output);
+		}
+		if(instruction == "HALT")
+		{
+			output <<  "Machine Halted - HALT instruction executed";
+			exit(-1);
+		}
+		else if(instruction == "?")
+		{
+			output <<  "Machine Halted - undefined opcode";
+			exit(-1);
+		}
+		else if(instruction == "LDX" || instruction ==  "ADDX" || 
+				instruction ==  "STX" || instruction ==  "SUBX" || 
+				instruction == "EMX" || instruction ==  "CLRX")
+		{
+			output <<  "Machine Halted - unimplemented opcode";
+			exit(-1);
 		}
 	}
 	
@@ -100,11 +116,11 @@ int main(int argc, char* argv[])
 	}
 	else if(ABUS != 0) //Illegal addressing mode
 	{
-		output << "???";
+		output << "??? ";
 	}
-    else if(MAR == 0)
+	else if(MAR == 0)
 	{
-	    output << "    ";
+		output << "    ";
 	}
 	else
 		output << hex << left << setw(4) << setfill(' ') << MAR;
