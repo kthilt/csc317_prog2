@@ -1,18 +1,21 @@
 #include "b17.h"
 
-void get_address_mode(int IR, int &ABUS)
+void get_address_mode(int IR, int &ABUS, int &MAR)
 {
 	cout << IR << ' ';
 	if( ((IR >> 2 ) & 15) == 1)
 	{
 		ABUS = 1;
-
 	}
 	else
 	{
 		ABUS = ((IR >> 12 ) & 4095);
 		cout << hex << "address " << ABUS;
 	}
+	
+	MAR = ((IR >> 12 ) & 4095);
+	
+	cout << "ABUS = " << ABUS << " MAR = " << MAR << "\n";
 
 	return;
 }
@@ -121,64 +124,85 @@ void match_instruction(int memory[], int &MAR, int &AC, int DBUS,
 		}
 		if(instruction == "ADD")
 		{
-			AC = AC + memory[MAR];
-			cout << "ADD " << AC << endl << endl;
+		    if(ABUS == 0) //Direct
+		    {
+			    AC = AC + memory[MAR];
+			    cout << "ADD " << AC << endl << endl;
+			}
+			else if(ABUS == 1) //Indirect
+		    {
+			    AC = AC + MAR;
+			    cout << "ADD " << AC << endl << endl;
+			}
 		}
 		if(instruction == "SUB") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
-			AC = AC - memory[MAR];
-			cout << "SUB " << AC << endl << endl; 
+		    if(ABUS == 0) //Direct
+		    {
+			    AC = AC - memory[MAR];
+			    cout << "SUB " << AC << endl << endl; 
+			}
+			else if(ABUS == 1) //Indirect
+			{
+				AC = AC - MAR;
+			    cout << "SUB " << AC << endl << endl; 
+			}
 		}
 		if(instruction == "LD") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
-			if(MAR == 1)
+		    cout << "ABUS = " << ABUS << "MAR = " << MAR << "\n";
+			if(ABUS == 1)
 			{
 				AC = MAR;
 			}
-			else
+			else if(ABUS == 0) //Direct
 			{
 				AC = memory[MAR];
 			}
 		}
 		if(instruction == "ST") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
-		    if(ABUS == 1) //Can't do immediate store
+		    if(ABUS == 0) //Direct
 		    {
-		        address_error("immediate", output);
-		    }
-		    
-			memory[MAR] = AC;
+			    memory[MAR] = AC;
+			}
+			else //Illegal
+			{
+			    address_error("illegal", output);
+			}
 		}
 		if(instruction == "EM") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
-			if(ABUS == 1) //Can't do immediate store
+            if(ABUS == 0) //Direct
 		    {
-		        address_error("immediate", output);
-		    }
-		    
-			DBUS = AC;
-			AC = memory[MAR];
-			memory[MAR] = DBUS;
+			    DBUS = AC;
+			    AC = memory[MAR];
+			    memory[MAR] = DBUS;
+			}
+			else
+			{
+			    address_error("illegal", output);
+			}
 		}
 		if(instruction == "AND") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
-			if(MAR == 1)
+			if(ABUS == 1)
 			{
 				AC = MAR & AC; ///// ask karlson
 			}
-			else
+			else if(ABUS == 0) //Direct
 			{
 				AC = memory[MAR] & AC;
 			}
-			
+	
 		}
 		if(instruction == "OR") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
-			if(MAR == 1)
+			if(ABUS == 1)
 			{
 				AC = MAR | AC; ///// ask karlson
 			}
-			else
+			else if(ABUS == 0) //Direct
 			{
 				AC = memory[MAR] | AC;
 			}
@@ -186,26 +210,31 @@ void match_instruction(int memory[], int &MAR, int &AC, int DBUS,
 		}
 		if(instruction == "XOR") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
-			if(MAR == 1)
+			if(ABUS == 1)
 			{
 				AC = MAR ^ AC; ///// ask karlson
 			}
-			else
+			else if(ABUS == 0) //Direct
 			{
 				AC = memory[MAR] ^ AC;
 			}
 			
 		}
 		//Different jumps
-		if((ABUS == 0) //Addressing mode is direct
-		   &&
-		   ((instruction == "J") || //Always jump
+		if(((instruction == "J") || //Always jump
 		   (instruction == "JZ" && AC == 0) || //Jump if accumulator is 0
 		   (instruction == "JN" && AC < 0) || //Jump if the accumulator is negative
 		   (instruction == "JP" && AC > 0))) //Jump if the accumulator is positive
 		{
-			IR = memory[MAR];
-			IC = MAR;
+		    if(ABUS == 0) //Direct
+		    {
+			    IR = memory[MAR];
+			    IC = MAR;
+			}
+			else if(ABUS == 1) //Indirect
+			{
+			    address_error("illegal", output);
+			}
 		}
 		//Clear the accumulator
 		if(instruction == "CLR")

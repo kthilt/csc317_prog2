@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 		file >> hex >> IR;
 
 		get_instruction(IR, instruction);
-		get_address_mode(IR, MAR);
+		get_address_mode(IR, ABUS, MAR);
 		match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
 
 		output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 	}
 	
 	get_instruction(IR, instruction);
-	get_address_mode(IR, MAR);
+	get_address_mode(IR, ABUS, MAR);
 	match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
 
 	output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
