@@ -5,7 +5,7 @@ FLAGS =
 CXXFLAGS =
 EXECS = b17
 DEBUG_EXECS = 
-O_FILES = b17.o
+O_FILES = b17.o b17_functions.o
 TEMPORARY_FILES = *~
 
 all: $(EXECS)

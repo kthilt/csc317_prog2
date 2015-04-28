@@ -111,7 +111,9 @@ void read_memory(int memory[],  char* filename)
 	file.close();
 }
 
-void match_instruction(int memory[], int &MAR, int &AC, int DBUS, int ABUS, string instruction)
+void match_instruction(int memory[], int &MAR, int &AC, int DBUS,
+                       int ABUS, int &IR, int &IC,
+                       ofstream &output, string instruction)
 {
 	if(instruction == "") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
@@ -137,19 +139,26 @@ void match_instruction(int memory[], int &MAR, int &AC, int DBUS, int ABUS, stri
 			{
 				AC = memory[MAR];
 			}
-			
 		}
 		if(instruction == "ST") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
+		    if(ABUS == 1) //Can't do immediate store
+		    {
+		        address_error("immediate", output);
+		    }
+		    
 			memory[MAR] = AC;
 		}
 		if(instruction == "EM") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
-			/// add illegal address mode function
+			if(ABUS == 1) //Can't do immediate store
+		    {
+		        address_error("immediate", output);
+		    }
+		    
 			DBUS = AC;
 			AC = memory[MAR];
 			memory[MAR] = DBUS;
-			
 		}
 		if(instruction == "AND") ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		{
@@ -208,3 +217,10 @@ void match_instruction(int memory[], int &MAR, int &AC, int DBUS, int ABUS, stri
 		{
 			AC = ~AC;
 		}
+}
+
+void address_error(string mode, ofstream &output)
+{
+    output <<  "Machine Halted - " << mode << " addressing mode.\n";
+	exit(-1);
+}

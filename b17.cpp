@@ -45,8 +45,7 @@ int main(int argc, char* argv[])
 
 		get_instruction(IR, instruction);
 		get_address_mode(IR, MAR);
-		match_instruction(memory, MAR, AC, DBUS, ABUS, instruction);
-
+		match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
 
 		output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
 			<< setfill('0') << IR << " " << dec << instruction << " ";
@@ -71,32 +70,17 @@ int main(int argc, char* argv[])
 		
 		if(ABUS == 2 || ABUS == 4 || ABUS == 6) //unimplemented addressing mode
 		{
-			output << "unimplemented addressing mode";
-			return 0;
+			address_error("unimplemented", output);
 		}
 		else if(ABUS != 0  && ABUS != 1) //illegal addressing mode
 		{
-			output << "illegal addressing mode";
-			return 0;
+			address_error("illegal", output);
 		}
-		
-		
-		if(ABUS == 1)
-		{
-			output << "IMM";
-		}
-		else
-			output << hex << MAR;
-	
-			output << hex << " AC[" << setw( 6 )
-				<< setfill( '0' ) << AC << "] X0[" << setw( 3 ) << setfill( '0' )
-				<< X0 << "] X1[" << setw( 3 ) << setfill( '0' ) << X1 << "] X2[" 
-				<< setw( 3 ) << setfill( '0' ) << X2 << "] X3[" << setw( 3 )
-				<< setfill( '0' ) << X3 << "]" << endl;
-
 	}
+	
 	get_instruction(IR, instruction);
 	get_address_mode(IR, MAR);
+	match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
 
 	output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
 		<< setfill('0') << IR << " " << dec << instruction << " ";
@@ -105,6 +89,10 @@ int main(int argc, char* argv[])
 	if(ABUS == 1)
 	{
 		output << "IMM";
+	}
+	else if(ABUS != 0) //Illegal addressing mode
+	{
+		output << "???";
 	}
 	else
 		output << hex << MAR;
