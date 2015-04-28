@@ -110,3 +110,101 @@ void read_memory(int memory[],  char* filename)
 
 	file.close();
 }
+
+void match_instruction(int memory[], int &MAR, int &AC, int DBUS, int ABUS, string instruction)
+{
+	if(instruction == "") ////////////////////////////////////////////////////////////////////////////////////////////////////////
+		{
+
+		}
+		if(instruction == "ADD")
+		{
+			AC = AC + memory[MAR];
+			cout << "ADD " << AC << endl << endl;
+		}
+		if(instruction == "SUB") ////////////////////////////////////////////////////////////////////////////////////////////////////////
+		{
+			AC = AC - memory[MAR];
+			cout << "SUB " << AC << endl << endl; 
+		}
+		if(instruction == "LD") ////////////////////////////////////////////////////////////////////////////////////////////////////////
+		{
+			if(MAR == 1)
+			{
+				AC = MAR;
+			}
+			else
+			{
+				AC = memory[MAR];
+			}
+			
+		}
+		if(instruction == "ST") ////////////////////////////////////////////////////////////////////////////////////////////////////////
+		{
+			memory[MAR] = AC;
+		}
+		if(instruction == "EM") ////////////////////////////////////////////////////////////////////////////////////////////////////////
+		{
+			/// add illegal address mode function
+			DBUS = AC;
+			AC = memory[MAR];
+			memory[MAR] = DBUS;
+			
+		}
+		if(instruction == "AND") ////////////////////////////////////////////////////////////////////////////////////////////////////////
+		{
+			if(MAR == 1)
+			{
+				AC = MAR & AC; ///// ask karlson
+			}
+			else
+			{
+				AC = memory[MAR] & AC;
+			}
+			
+		}
+		if(instruction == "OR") ////////////////////////////////////////////////////////////////////////////////////////////////////////
+		{
+			if(MAR == 1)
+			{
+				AC = MAR | AC; ///// ask karlson
+			}
+			else
+			{
+				AC = memory[MAR] | AC;
+			}
+			
+		}
+		if(instruction == "XOR") ////////////////////////////////////////////////////////////////////////////////////////////////////////
+		{
+			if(MAR == 1)
+			{
+				AC = MAR ^ AC; ///// ask karlson
+			}
+			else
+			{
+				AC = memory[MAR] ^ AC;
+			}
+			
+		}
+		//Different jumps
+		if((ABUS == 0) //Addressing mode is direct
+		   &&
+		   ((instruction == "J") || //Always jump
+		   (instruction == "JZ" && AC == 0) || //Jump if accumulator is 0
+		   (instruction == "JN" && AC < 0) || //Jump if the accumulator is negative
+		   (instruction == "JP" && AC > 0))) //Jump if the accumulator is positive
+		{
+			IR = memory[MAR];
+			IC = MAR;
+		}
+		//Clear the accumulator
+		if(instruction == "CLR")
+		{
+			AC = 0;            
+		}
+		//Complement the accumulator
+		if(instruction == "COM")
+		{
+			AC = ~AC;
+		}
