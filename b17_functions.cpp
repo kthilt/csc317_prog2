@@ -240,6 +240,8 @@ void match_instruction(int memory[], int &MAR, int &AC, int &DBUS,
 
 void address_error(string mode, ofstream &output)
 {
+        output << "Test\n";
     output <<  "Machine Halted - " << mode << " addressing mode.\n";
-	exit(-1);
+	exit(0);
 }
+

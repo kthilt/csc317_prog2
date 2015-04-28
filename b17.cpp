@@ -27,13 +27,13 @@ int main(int argc, char* argv[])
 	if(!file)
 	{
 		cout << "Error opening object file.";
-		exit(-1);
+		return -1;
 	}
 	output.open("output.txt");
 	if(!output)
 	{
 		cout << "Error opening output file.";
-		exit(-1);
+		return -1;
 	}
 
 	getline(file, instruction);
@@ -84,20 +84,20 @@ int main(int argc, char* argv[])
 		}
 		if(instruction == "HALT")
 		{
-			output <<  "Machine Halted - HALT instruction executed";
-			exit(-1);
+			output <<  "Machine Halted - HALT instruction executed\n";
+			return -1;
 		}
 		else if(instruction == "?")
 		{
-			output <<  "Machine Halted - undefined opcode";
-			exit(-1);
+			output <<  "Machine Halted - undefined opcode\n";
+			return 0;
 		}
 		else if(instruction == "LDX" || instruction ==  "ADDX" || 
 				instruction ==  "STX" || instruction ==  "SUBX" || 
 				instruction == "EMX" || instruction ==  "CLRX")
 		{
-			output <<  "Machine Halted - unimplemented opcode";
-			exit(-1);
+			output <<  "Machine Halted - unimplemented opcode\n";
+			return 0;
 		}
 	}
 	
@@ -130,25 +130,26 @@ int main(int argc, char* argv[])
 			<< X0 << "] X1[" << setw( 3 ) << setfill( '0' ) << X1 << "] X2[" 
 			<< setw( 3 ) << setfill( '0' ) << X2 << "] X3[" << setw( 3 )
 			<< setfill( '0' ) << X3 << "]" << endl;
+			
 	if(instruction == "HALT")
 	{
-		output <<  "Machine Halted - HALT instruction executed";
-		exit(-1);
+		output <<  "Machine Halted - HALT instruction executed\n";
+		return 0;
 	}
 	else if(instruction == "?")
 	{
-		output <<  "Machine Halted - undefined opcode";
-		exit(-1);
+		output <<  "Machine Halted - undefined opcode\n";
+		return 0;
 	}
 	else if(instruction == "LDX" || "ADDX" || "STX" || "SUBX" || "EMX" || "CLRX")
 	{
-		output <<  "Machine Halted - unimplemented opcode";
-		exit(-1);
+		output <<  "Machine Halted - unimplemented opcode\n";
+		return 0;
 	}
 	// need to add halt messages for address mode errors
 	file.close();
 	output.close();
+	
+	return 0;
 }
-
-
 
