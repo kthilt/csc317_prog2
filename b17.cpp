@@ -47,23 +47,30 @@ int main(int argc, char* argv[])
 		get_address_mode(IR, ABUS, MAR);
 		match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
 
+        cout << "ABUS = " << ABUS << " MAR = " << MAR << "\n";
+
 		output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
-			<< setfill('0') << IR << " " << dec << instruction << " ";
+			<< setfill('0') << IR << " " << dec << left << setw(4) 
+			<< setfill(' ') << instruction << " ";
 		IC++;
 	
 		if(ABUS == 1)
 		{
-			output << "IMM";
+			output << "IMM ";
 		}
 		else if(ABUS != 0) //Illegal addressing mode
 		{
 			output << "???";
 		}
+		else if(MAR == 0)
+		{
+		    output << "    ";
+		}
 		else
-			output << hex << MAR;
+			output << hex << left << setw(4) << setfill(' ') << MAR;
 	
 			output << hex << " AC[" << setw( 6 )
-				<< setfill( '0' ) << AC << "] X0[" << setw( 3 ) << setfill( '0' )
+				<< setfill( '0' ) << right << AC << "] X0[" << setw( 3 ) << setfill( '0' )
 				<< X0 << "] X1[" << setw( 3 ) << setfill( '0' ) << X1 << "] X2[" 
 				<< setw( 3 ) << setfill( '0' ) << X2 << "] X3[" << setw( 3 )
 				<< setfill( '0' ) << X3 << "]" << endl;
@@ -83,22 +90,27 @@ int main(int argc, char* argv[])
 	match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
 
 	output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
-		<< setfill('0') << IR << " " << dec << instruction << " ";
+		<< setfill('0') << IR << " " << dec << left << setw(4) 
+		<< setfill(' ') << instruction << " ";
 	IC++;
 
 	if(ABUS == 1)
 	{
-		output << "IMM";
+		output << "IMM ";
 	}
 	else if(ABUS != 0) //Illegal addressing mode
 	{
 		output << "???";
 	}
+    else if(MAR == 0)
+	{
+	    output << "    ";
+	}
 	else
-		output << hex << MAR;
+		output << hex << left << setw(4) << setfill(' ') << MAR;
 
 		output << hex << " AC[" << setw( 6 )
-			<< setfill( '0' ) << AC << "] X0[" << setw( 3 ) << setfill( '0' )
+			<< setfill( '0' ) << right << AC << "] X0[" << setw( 3 ) << setfill( '0' )
 			<< X0 << "] X1[" << setw( 3 ) << setfill( '0' ) << X1 << "] X2[" 
 			<< setw( 3 ) << setfill( '0' ) << X2 << "] X3[" << setw( 3 )
 			<< setfill( '0' ) << X3 << "]" << endl;

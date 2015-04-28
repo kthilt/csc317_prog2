@@ -9,13 +9,11 @@ void get_address_mode(int IR, int &ABUS, int &MAR)
 	}
 	else
 	{
-		ABUS = ((IR >> 12 ) & 4095);
+		ABUS = ((IR >> 2 ) & 15);
 		cout << hex << "address " << ABUS;
 	}
 	
 	MAR = ((IR >> 12 ) & 4095);
-	
-	cout << "ABUS = " << ABUS << " MAR = " << MAR << "\n";
 
 	return;
 }
