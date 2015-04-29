@@ -1,3 +1,11 @@
+/*****************************************************************************
+ * @file 
+ *
+ * @brief This file contains the header information for the b17 program
+ * (function prototypes and includes)
+ *
+ * @mainpage b17.cpp
+ ****************************************************************************/
 #include <iostream>
 #include <iomanip>
 #include <string>
