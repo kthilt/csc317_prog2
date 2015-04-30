@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+
+%special packages used for symbols, formatting, etc.
+
+%\usepackage{tasks}
+\usepackage{courier}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{verbatim}
+
+%Titles
+\newcommand{\HWKtitle}[4]{\begin{center}
+\textbf{#1\\Program #2\\Title: #3\\Due: #4}
+\end{center}\medskip\hrule\bigskip}
+
+\newcommand{\HWKname}[3]{\begin{flushright}
+Name: \underline{\textbf{#1}}\\ \underline{\textbf{#2}}\\ \underline{\textbf{#3}}\end{flushright}}
+
+\newcommand{\pdflatexmargins}{
+\setlength{\topmargin}{-.5in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{8.75in}}
+
+%Linear Algebra commands
+\newcommand{\vce}[4]{\vc{#1} = \langle #2, #3, #4 \rangle}
+\newcommand{\vcf}[5]{\vc{#1}(#2) = \langle #3, #4, #5 \rangle}
+\newcommand{\vcfcn}[5]{\vc{#1}(#2) = #3\,\vc{\hat{i}} + #4\,\vc{\hat{j}} + #5\,\vc{\hat{k}}}
+\newcommand{\veclist}[2]{\vc{#1}_1, \ldots, \vc{#1}_{#2}}
+\newcommand{\ip}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\left|#1\right|}
+\newcommand{\Span}[1]{\textnormal{Span}\left(#1\right)}
+\newcommand{\tr}[1]{\textnormal{tr}\left(#1\right)}
+
+%User commands
+\newcommand{\vc}[1]{\mathbf{#1}}
+\newcommand{\newprob}{\medskip \hrule \medskip}
+\newcommand{\rn}[1]{\mathbb{R}^{#1}}
+\def\qed{\hspace*{\fill}\rule{1.854mm}{3mm}}
+
+%margins
+\pdflatexmargins
+
+
+
+\begin{document}
+
+\HWKname{Evan Hammer}{Marcus Berger}{Kevin Hilt}  %%%%%% For those of you who want an obvious name on your LaTeX solution.
+
+\HWKtitle{CSC 317 Program}{\#2}{B-17}{May 1, 2015}
+
+
+\subsection{Libraries used}
+Libraries used in this program are :\\
+$\langle iostream \rangle, \langle iomanip \rangle, \langle string \rangle, \langle sstream \rangle, \langle fstream \rangle, and \langle cstdlib \rangle$
+
+\subsection{Algorithms}
+\begin{enumerate}
+\item Read in the object file and set up the memory array
+\item Read in instruction counter and the number of instruction to be executed
+\item For each instruction  begin to execute instruction
+\begin{enumerate}\item Decode the instruction and determine the address mode and instruction to be executed.
+\item Execute the correct instruction \end{enumerate}
+\item Check the address mode to get the correct output
+\item Output the information for executed instruction 
+\item Repeat steps 3-5 for each instruction
+\item If an error is encountered 
+\end{enumerate}
+
+\subsection{Functions and Program Structure:}
+\begin{enumerate}
+\item \textbf{Compiling and Usage:}\\
+Compile by typing “make b17” in Linux\\
+Usage: b17 “object file name”\\
+Sample object file:
+\verbatiminput{test1.obj}
+Sample output file:
+\verbatiminput{output1.txt}
+\end{enumerate}
+
+
+\end{document}
+ 
