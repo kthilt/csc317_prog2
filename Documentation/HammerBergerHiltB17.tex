@@ -52,6 +52,13 @@ Name: \underline{\textbf{#1}}\\ \underline{\textbf{#2}}\\ \underline{\textbf{#3}
 
 \HWKtitle{CSC 317 Program}{\#2}{B-17}{May 1, 2015}
 
+\subsection{Program Description}
+The B17 is a 24-bit word-addressable accumulator architecture.  It supports up to 64 instructions, up to four addressing modes, and 212 (4096) words of memory. Main memory consists of 4,096 words, each of which is 24 bits wide. Addresses are 12 bits wide, and range from 000 through FFF. Within the word, bits are numbered from right to left, with bit 0 the least significant bit and bit 23 the most significant bit. The memory interface transfers one word of data at a time. Communication with memory is via two registers, MAR and MDR. Other locations include IC, ABUS, DBUS three registers, AC, ALU and IR. The B17 uses fixed-length instructions. Instructions have the following format an ADDR a twelve-bit operand address (bits 23-12), a six-bit opcode (bits 11-6), and a six-bit addressing mode (bits 5-0). The b17 uses those bits to determine the instruction to be executed from the instruction set. The program continues to execute instructions untill a halt instruction is found or a halting error occurs.
+
+\subsection{Group Assesment}
+Kevin Hilt: 33\%\\
+Marcus Berger: 34\%\\
+Evan Hammer: 33\%\\
 
 \subsection{Libraries used}
 Libraries used in this program are :\\
@@ -71,15 +78,40 @@ $\langle iostream \rangle, \langle iomanip \rangle, \langle string \rangle, \lan
 \end{enumerate}
 
 \subsection{Functions and Program Structure:}
-\begin{enumerate}
-\item \textbf{Compiling and Usage:}\\
+
+\subsubsection{Compiling and Usage:}
 Compile by typing “make b17” in Linux\\
 Usage: b17 “object file name”\\
 Sample object file:
 \verbatiminput{test1.obj}
+Output file will contain memory address, instructions, the instruction executed, the address mode, that contains of the accumulator and the contains of registers x0-x3 for each instruction executed. When a halt instruction or halt error is encountered a correct message is printed and the program terminates. \\
 Sample output file:
 \verbatiminput{output1.txt}
-\end{enumerate}
+
+\subsubsection{Test}
+Test 1: Test  ADD, SUB, Jump, Load, and Halt instructions with immediate and direct addressing modes
+input:
+\verbatiminput{test1.obj}
+Output:
+\verbatiminput{output1.txt}
+Text 2: Test illegal addressing mode
+input:
+\verbatiminput{test3.txt}
+Output:
+\verbatiminput{output3.txt}
+Test 3: Test clear instruction and unimplemented op code
+Input:
+\verbatiminput{test4.txt}
+Output:
+\verbatiminput{output4.txt}
+
+\subsection{What was submitted?}
+b17.cpp – contains the main function for the b17 program\\
+b17\_functions.cpp – contains the get\_instruction, get\_addressmode, hex\_to\_int, read\_memoy, and match\_instruction functions to prevent needing to repeat code,\\
+b17.h – header file containing libraries used and function prototypes for the b17 program\\
+makefile – complies the b17 program by ''typing make b17''
+
+
 
 
 \end{document}
