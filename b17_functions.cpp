@@ -119,19 +119,19 @@ void read_memory(char* filename)
 	}
 
 	string line, end;
-	int temp, temp2, temp3;
+	int temp, instruction_num, temp3;
 
 	file >> line; // read memory address
-	hex_to_int(line, temp); // convert to int and store
-	file >> temp2; // number of instructions on line
+	hex_to_int(line, MAR); // convert to int and store
+	file >> instruction_num; // number of instructions on line
 
 	// for each read in instruction and stroe it in the correct memory location
-	for(int i = 0; i < temp2; i++)
+	for(int i = 0; i < instruction_num; i++)
 	{
 		file >> line;
 		hex_to_int(line, temp3);
-		memory[temp] = temp3;
-		temp++;
+		memory[MAR] = temp3;
+		MAR++;
 	}
 
 	file >> end; // read halt instruction

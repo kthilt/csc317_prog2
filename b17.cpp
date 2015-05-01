@@ -80,22 +80,8 @@
  *****************************************************************************/
 int main(int argc, char* argv[])
 {
-	int MAR; // memory address register
-	int IC; // instruction counter
-	int X0 = 0; // register 0
-	int	X1 = 0; // register 1
-	int X2 = 0; // register 2
-	int X3 = 0; // register 3
-	int ABUS = 0; 
-	int MDR = 0; // memory data register
-	int AC = 0; // 
-	int ALU = 0; // athimetic logic unit
-	int IR = 0; // instruction register
-	int DBUS = 0; // data bus
-	int memory[4096]; // memory array
 
-	int instruction_number; // number of instruction read in
-	string instruction; // current instruction
+	
 	ifstream file; // input file
 	ofstream output; // output file
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.21)  1 MAY 2015 09:33
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.21)  1 MAY 2015 14:04
 entering extended mode
 **HammerBergerHiltB17.tex
 
@@ -207,6 +207,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 59--62
 [1
 
 {C:/Users/7110002/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--86
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--88
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
+
+ []
+
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no œ in font cmr10!
@@ -220,20 +249,19 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no  in font cmr10!
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 97.
-
 (C:\Users\Public\Documents\miktex\tex\latex\psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 File: test1.obj  (verbatim)
-File: output1.txt  (verbatim)
  [2]
+File: output1.txt  (verbatim)
 File: test1.obj  (verbatim)
 File: output1.txt  (verbatim)
 File: test3.txt  (verbatim)
 File: output3.txt  (verbatim)
 File: test4.txt  (verbatim)
-File: output4.txt  (verbatim)
  [3]
+File: output4.txt  (verbatim)
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no “ in font cmr10!
@@ -264,7 +292,7 @@ cm/cmbx12.pfb><C:/Users/Public/Documents/miktex/fonts/type1/public/amsfonts/cm/
 cmmi10.pfb><C:/Users/Public/Documents/miktex/fonts/type1/public/amsfonts/cm/cmr
 10.pfb><C:/Users/Public/Documents/miktex/fonts/type1/public/amsfonts/cm/cmsy10.
 pfb><C:/Users/Public/Documents/miktex/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on HammerBergerHiltB17.pdf (4 pages, 95546 bytes).
+Output written on HammerBergerHiltB17.pdf (4 pages, 95827 bytes).
 PDF statistics:
  40 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

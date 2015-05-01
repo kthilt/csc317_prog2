@@ -78,17 +78,17 @@ $\langle iostream \rangle, \langle iomanip \rangle, \langle string \rangle, \lan
 \end{enumerate}
 
 \subsection{Functions and Program Structure:}
-int main(int argc, char\* argv[]) - The main function handles file I/O and output formating for the b17 program.
+int main(int argc, char\* argv[]) - The main function handles file I/O and output formating for the b17 program. Written by Marcus Beger, Evan Hammer, Kevin Hilt using a paired programming approach\\
 
-void get\_address\_mode(int IR, int \&ABUS) - This function pulls out the bits containing the address mode out of the  instruction and sets the ABUS equal to the address mode
+void get\_address\_mode(int IR, int \&ABUS) - This function pulls out the bits containing the address mode out of the  instruction and sets the ABUS equal to the address mode Written by Marcus Berger\\
 
-void get\_instruction(int IR, string \&instruction) - This function pulls out the bits containing the instruction and sets it equal to a value at an index into an array containing the instruction set.
+void get\_instruction(int IR, string \&instruction) - This function pulls out the bits containing the instruction and sets it equal to a value at an index into an array containing the instruction set. Written by Marcus Beger, Evan Hammer, Kevin Hilt using a paired programming approach\\
 
-void hex\_to\_int(string hex\_string, int\& stored\_int) - This function converts a hex number string to an int variable.
+void hex\_to\_int(string hex\_string, int\& stored\_int) - This function converts a hex number string to an int variable. Written by Kevin Hilt\\
 
-void read\_memory(int memory[],  char\* filename) - This function pulls out the bits containing the address mode out of the  instruction and sets the ABUS equal to the address mode
+void read\_memory(int memory[],  char\* filename) - This function pulls out the bits containing the address mode out of the  instruction and sets the ABUS equal to the address mode. Written by Marcus Beger, Evan Hammer, Kevin Hilt using a paired programming approach\\
 
-void match\_instruction(int memory[], int \&MAR, int \&AC, int \&DBUS,  int \&ABUS, int \&IR, int \&IC,  ofstream \&output, string instruction) -This function contains the various code to execute each instruction and the if statements to determine which one to do.
+void match\_instruction(int memory[], int \&MAR, int \&AC, int \&DBUS,  int \&ABUS, int \&IR, int \&IC,  ofstream \&output, string instruction) -This function contains the various code to execute each instruction and the if statements to determine which one to do. Written by Marcus Beger, Evan Hammer, Kevin Hilt using a paired programming approach\\
 
 \subsubsection{Compiling and Usage:}
 Compile by typing “make b17” in Linux\\
@@ -120,7 +120,8 @@ Output:
 b17.cpp – contains the main function for the b17 program\\
 b17\_functions.cpp – contains the get\_instruction, get\_addressmode, hex\_to\_int, read\_memoy, and match\_instruction functions to prevent needing to repeat code,\\
 b17.h – header file containing libraries used and function prototypes for the b17 program\\
-makefile – complies the b17 program by ''typing make b17''
+makefile – complies the b17 program by ''typing make b17''\\
+HammerBergerHiltB17.pdf
 
 
 
