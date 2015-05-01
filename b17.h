@@ -15,7 +15,7 @@
 using namespace std;
 
 void get_address_mode();
-void get_instruction();
+void get_instruction(string &instruction);
 void hex_to_int(string hex_string, int& stored_int);
 void read_memory(char* filename);
 void match_instruction(ofstream &output, string instruction);

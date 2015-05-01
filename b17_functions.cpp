@@ -44,7 +44,7 @@ void get_address_mode()
  * 
  * 
  *****************************************************************************/
-void get_instruction()
+void get_instruction(string &instruction)
 {
 	// set up array for instruction set
 	string in_set[16][4] = { "HALT", "LD", "ADD", "J",
@@ -119,18 +119,17 @@ void read_memory(char* filename)
 	}
 
 	string line, end;
-	int temp, instruction_num, temp3;
 
 	file >> line; // read memory address
 	hex_to_int(line, MAR); // convert to int and store
-	file >> instruction_num; // number of instructions on line
+	file >> instruction_number; // number of instructions on line
 
 	// for each read in instruction and stroe it in the correct memory location
-	for(int i = 0; i < instruction_num; i++)
+	for(int i = 0; i < instruction_number; i++)
 	{
 		file >> line;
-		hex_to_int(line, temp3);
-		memory[MAR] = temp3;
+		hex_to_int(line, MDR);
+		memory[MAR] = MDR;
 		MAR++;
 	}
 
@@ -141,16 +140,16 @@ void read_memory(char* filename)
 	// continue untill you reach halt instruction
 	while(line != end)
 	{
-		hex_to_int(line, temp);
-		file >> temp2;
+		hex_to_int(line, MAR);
+		file >> instruction_number;
 
 		// for each instruction read in and stroe at memory location
-		for(int i = 0; i < temp2; i++)
+		for(int i = 0; i < instruction_number; i++)
 		{
 			file >> line;
-			hex_to_int(line, temp3);
-			memory[temp] = temp3;
-			temp++;
+			hex_to_int(line, MDR);
+			memory[MAR] = MDR;
+			MAR++;
 		}
 
 		file >> line; // read last line of file 
@@ -299,7 +298,7 @@ void match_instruction(ofstream &output, string instruction)
 					(instruction == "JP" && AC > 0))) //Jump if the accumulator is positive
 				{
 					IR = memory[MAR];
-					//IC = MAR;
+					
 				}
 			}
 

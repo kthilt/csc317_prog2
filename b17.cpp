@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
 	ifstream file; // input file
 	ofstream output; // output file
 
-	read_memory(memory, argv[1]); 
+	read_memory(argv[1]); 
 
 	// open and error check input file
 	file.open(argv[1]);
@@ -112,15 +112,15 @@ int main(int argc, char* argv[])
 		file >> hex >> IR; // read in instruction
 
 		// decode instruction
-		get_instruction(IR, instruction);
+		get_instruction(instruction);
 		// decode address mode
-		get_address_mode(IR, ABUS);
+		get_address_mode();
 
 		// set MAR equal to value for instruction
 		MAR = ((IR >> 12 ) & 4095);
 
 		//do correct instruction
-		match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
+		match_instruction(output, instruction);
 
 		// output the Instruction counter and instruction with padding
 		output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
@@ -192,15 +192,15 @@ int main(int argc, char* argv[])
 	}
 
 	//decode instruction
-	get_instruction(IR, instruction);
+	get_instruction(instruction);
 	// decode address mode
-	get_address_mode(IR, ABUS);
+	get_address_mode();
 
 	// set MAR equal to value for instruction
 	MAR = ((IR >> 12 ) & 4095);
 
 	// get which instruction to do
-	match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
+	match_instruction(output, instruction);
 
 	// output next instruction counter and instruction
 	output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
