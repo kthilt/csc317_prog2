@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.21)  1 MAY 2015 14:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.1.21)  1 MAY 2015 15:25
 entering extended mode
 **HammerBergerHiltB17.tex
 
@@ -232,7 +232,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--90
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 91--93
 
  []
 
@@ -248,7 +248,7 @@ Missing character: There is no ú in font cmr10!
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
 Missing character: There is no ù in font cmr10!
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 97.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 98.
 (C:\Users\Public\Documents\miktex\tex\latex\psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -259,8 +259,8 @@ File: test1.obj  (verbatim)
 File: output1.txt  (verbatim)
 File: test3.txt  (verbatim)
 File: output3.txt  (verbatim)
-File: test4.txt  (verbatim)
  [3]
+File: test4.txt  (verbatim)
 File: output4.txt  (verbatim)
 Missing character: There is no ‚ in font cmr10!
 Missing character: There is no Ä in font cmr10!
@@ -284,7 +284,7 @@ Here is how much of TeX's memory you used:
  5689 multiletter control sequences out of 15000+200000
  9716 words of font info for 37 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 27i,4n,26p,1039b,251s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,4n,26p,1039b,184s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/Public/Documents/miktex/fonts/enc/dv
 ips/fontname/8r.enc}<C:/Users/Public/Documents/miktex/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb><C:/Users/Public/Documents/miktex/fonts/type1/public/amsfonts/
@@ -292,7 +292,7 @@ cm/cmbx12.pfb><C:/Users/Public/Documents/miktex/fonts/type1/public/amsfonts/cm/
 cmmi10.pfb><C:/Users/Public/Documents/miktex/fonts/type1/public/amsfonts/cm/cmr
 10.pfb><C:/Users/Public/Documents/miktex/fonts/type1/public/amsfonts/cm/cmsy10.
 pfb><C:/Users/Public/Documents/miktex/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on HammerBergerHiltB17.pdf (4 pages, 95731 bytes).
+Output written on HammerBergerHiltB17.pdf (4 pages, 96152 bytes).
 PDF statistics:
  40 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

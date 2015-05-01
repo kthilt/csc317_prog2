@@ -80,12 +80,26 @@
  *****************************************************************************/
 int main(int argc, char* argv[])
 {
-
+	int MAR = 0; // memory address register
+	int IC = 0; // instruction counter
+	int X0 = 0; // register 0
+	int	X1 = 0; // register 1
+	int X2 = 0; // register 2
+	int X3 = 0; // register 3
+	int ABUS = 0; 
+	int MDR = 0; // memory data register
+	int AC = 0; // 
+	int ALU = 0; // athimetic logic unit
+	int IR = 0; // instruction register
+	int DBUS = 0; // data bus
+	int memory[4096]; // memory array
+	int instruction_number = 0; // number of instruction read in
+	string instruction; // current instruction
 	
 	ifstream file; // input file
 	ofstream output; // output file
 
-	read_memory(argv[1]); 
+	read_memory(memory,instruction_number, MAR, MDR, argv[1]); 
 
 	// open and error check input file
 	file.open(argv[1]);
@@ -112,15 +126,15 @@ int main(int argc, char* argv[])
 		file >> hex >> IR; // read in instruction
 
 		// decode instruction
-		get_instruction(instruction);
+		get_instruction(IR,instruction);
 		// decode address mode
-		get_address_mode();
+		get_address_mode(IR,ABUS);
 
 		// set MAR equal to value for instruction
 		MAR = ((IR >> 12 ) & 4095);
 
 		//do correct instruction
-		match_instruction(output, instruction);
+		match_instruction(memory,MAR,AC,DBUS,ABUS,IC,IR,output,instruction);
 
 		// output the Instruction counter and instruction with padding
 		output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
@@ -191,16 +205,16 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	//decode instruction
-	get_instruction(instruction);
+	// decode instruction
+	get_instruction(IR,instruction);
 	// decode address mode
-	get_address_mode();
+	get_address_mode(IR,ABUS);
 
 	// set MAR equal to value for instruction
 	MAR = ((IR >> 12 ) & 4095);
 
-	// get which instruction to do
-	match_instruction(output, instruction);
+	//do correct instruction
+	match_instruction(memory,MAR,AC,DBUS,ABUS,IC,IR,output,instruction);
 
 	// output next instruction counter and instruction
 	output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
