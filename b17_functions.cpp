@@ -13,7 +13,7 @@
  * 
  * 
  *****************************************************************************/
-void get_address_mode(int IR, int &ABUS)
+void get_address_mode()
 {
 	// get bits 2-5 of instruction
 	// immediate
@@ -44,7 +44,7 @@ void get_address_mode(int IR, int &ABUS)
  * 
  * 
  *****************************************************************************/
-void get_instruction(int IR, string &instruction)
+void get_instruction()
 {
 	// set up array for instruction set
 	string in_set[16][4] = { "HALT", "LD", "ADD", "J",
@@ -106,7 +106,7 @@ void hex_to_int(string hex_string, int& stored_int)
  *
  * 
  *****************************************************************************/
-void read_memory(int memory[],  char* filename)
+void read_memory(char* filename)
 {
 	ifstream file;
 
@@ -180,9 +180,7 @@ void read_memory(int memory[],  char* filename)
  * 
  * 
  *****************************************************************************/
-void match_instruction(int memory[], int &MAR, int &AC, int &DBUS,
-					   int &ABUS, int &IR, int &IC,
-					   ofstream &output, string instruction)
+void match_instruction(ofstream &output, string instruction)
 {
 		// if statement to determine what to do for each instruction
 		
