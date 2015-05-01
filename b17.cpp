@@ -67,6 +67,17 @@
  *****************************************************************************/
 #include "b17.h"
 
+/**************************************************************************//** 
+ * @author Marcus Berger, Kevin Hilt, Evan Hammer (paired programming)
+ * 
+ * @par Description: 
+ * The main function handles file I/O and output formating for the b17 program.
+ * 
+ * @param[in]   argc - number of command line arguments
+ * @param[in]	argv[] - command line arguments
+ * 
+ * 
+ *****************************************************************************/
 int main(int argc, char* argv[])
 {
 	int MAR; // memory address register
@@ -117,7 +128,11 @@ int main(int argc, char* argv[])
 		// decode instruction
 		get_instruction(IR, instruction);
 		// decode address mode
-		get_address_mode(IR, ABUS, MAR);
+		get_address_mode(IR, ABUS);
+
+		// set MAR equal to value for instruction
+		MAR = ((IR >> 12 ) & 4095);
+
 		//do correct instruction
 		match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
 
@@ -125,7 +140,15 @@ int main(int argc, char* argv[])
 		output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
 			<< setfill('0') << IR << " " << dec << left << setw(4) 
 			<< setfill(' ') << instruction << " ";
-		IC++;
+		if(((instruction == "J") || //Always jump
+			(instruction == "JZ" && AC == 0) || //Jump if accumulator is 0
+			(instruction == "JN" && AC < 0) || //Jump if the accumulator is negative
+			(instruction == "JP" && AC > 0))) //Jump if the accumulator is positive
+		{
+			IC = MAR;
+		}
+		else
+			IC++;
 	
 		// check for immediate or illegal address mode
 		if(ABUS == 1)
@@ -185,7 +208,11 @@ int main(int argc, char* argv[])
 	//decode instruction
 	get_instruction(IR, instruction);
 	// decode address mode
-	get_address_mode(IR, ABUS, MAR);
+	get_address_mode(IR, ABUS);
+
+	// set MAR equal to value for instruction
+	MAR = ((IR >> 12 ) & 4095);
+
 	// get which instruction to do
 	match_instruction(memory, MAR, AC, DBUS, ABUS, IR, IC, output, instruction);
 
@@ -193,7 +220,15 @@ int main(int argc, char* argv[])
 	output << hex << setw( 3 ) << setfill( '0' ) << IC << ": " << setw(6) 
 		<< setfill('0') << IR << " " << dec << left << setw(4) 
 		<< setfill(' ') << instruction << " ";
-	IC++;
+	if(((instruction == "J") || //Always jump
+			(instruction == "JZ" && AC == 0) || //Jump if accumulator is 0
+			(instruction == "JN" && AC < 0) || //Jump if the accumulator is negative
+			(instruction == "JP" && AC > 0))) //Jump if the accumulator is positive
+		{
+			IC = MAR;
+		}
+		else
+			IC++;
 
 	// check for immediate address mode
 	if(ABUS == 1)

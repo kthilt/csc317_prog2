@@ -1,6 +1,19 @@
 #include "b17.h"
 
-void get_address_mode(int IR, int &ABUS, int &MAR)
+/**************************************************************************//** 
+ * @author Marcus Berger, Kevin Hilt, Evan Hammer (paired programming)
+ * 
+ * @par Description: 
+ * This function pulls out the bits containing the address mode out of the
+ * instruction and sets the ABUS equal to the address mode
+ * 
+ * @param[in]		IR - Instruction Register
+ * @param[in,out]	ABUS - Address Bus
+ *
+ * 
+ * 
+ *****************************************************************************/
+void get_address_mode(int IR, int &ABUS)
 {
 	// get bits 2-5 of instruction
 	// immediate
@@ -13,12 +26,24 @@ void get_address_mode(int IR, int &ABUS, int &MAR)
 	{
 		ABUS = ((IR >> 2 ) & 15);
 	}
-	// set MAR equal to value for instruction
-	MAR = ((IR >> 12 ) & 4095);
+	
 
 	return;
 }
 
+/**************************************************************************//** 
+ * @author Marcus Berger, Kevin Hilt, Evan Hammer (paired programming)
+ * 
+ * @par Description: 
+ * This function pulls out the bits containing the instruction and sets it
+ * equal to a value at an index into an array containing the instruction set.
+ * 
+ * @param[in]		IR - Instruction Register
+ * @param[in,out]	Instruction - the instruction to be executed.
+ *
+ * 
+ * 
+ *****************************************************************************/
 void get_instruction(int IR, string &instruction)
 {
 	// set up array for instruction set
@@ -50,7 +75,17 @@ void get_instruction(int IR, string &instruction)
 
 }
 
-
+/**************************************************************************//** 
+ * @author Kevin Hilt (paired programming)
+ * 
+ * @par Description: 
+ * This function converts a hex number string to an int variable.
+ * 
+ * @param[in]		hex_string - a hex number as a string
+ * @param[in,out]	stored_int - int value to store number into
+ *
+ * 
+ *****************************************************************************/
 void hex_to_int(string hex_string, int& stored_int)
 { 
 	stringstream value;
@@ -58,6 +93,19 @@ void hex_to_int(string hex_string, int& stored_int)
 	value >> stored_int;
 }
 
+
+/**************************************************************************//** 
+ * @author Marcus Berger, Kevin Hilt (paired programming)
+ * 
+ * @par Description: 
+ * This function pulls out the bits containing the address mode out of the
+ * instruction and sets the ABUS equal to the address mode
+ * 
+ * @param[in]	memory[] - an array creating a false memory to operate on
+ * @param[in]	filename - Name of the object file
+ *
+ * 
+ *****************************************************************************/
 void read_memory(int memory[],  char* filename)
 {
 	ifstream file;
@@ -112,6 +160,26 @@ void read_memory(int memory[],  char* filename)
 	file.close();
 }
 
+
+/**************************************************************************//** 
+ * @author Marcus Berger, Kevin Hilt, Evan Hammer (paired programming)
+ * 
+ * @par Description: 
+ * This function contains the various code to execute each instruction and
+ * the if statements to determine which one to do.
+ * 
+ * @param[in]			memory - false memory array
+ * @param[in,out]		MAR - Memory address register
+ * @param[in,out]		AC - Accumulator
+ * @param[in,out]		DBUS - Data bus
+ * @param[in,out]		ABUS - Address Bus
+ * @param[in,out]		IR - Instruction Register
+ * @param[in,out]		IC - Instruction Counter
+ * @param[in]			instruction - Instruction to be executed
+ *
+ * 
+ * 
+ *****************************************************************************/
 void match_instruction(int memory[], int &MAR, int &AC, int &DBUS,
 					   int &ABUS, int &IR, int &IC,
 					   ofstream &output, string instruction)
@@ -184,7 +252,7 @@ void match_instruction(int memory[], int &MAR, int &AC, int &DBUS,
 			// for immediate AND use MAR and AC
 			if(ABUS == 1)
 			{
-				AC = MAR & AC; ///// ask karlson
+				AC = MAR & AC; 
 			}
 			else if(ABUS == 0) // for direct use memory at index MAR and AC
 			{
@@ -197,7 +265,7 @@ void match_instruction(int memory[], int &MAR, int &AC, int &DBUS,
 			// for immediate OR use MAR and AC
 			if(ABUS == 1)
 			{
-				AC = MAR | AC; ///// ask karlson
+				AC = MAR | AC; 
 			}
 			else if(ABUS == 0) // for direct use memory at index MAR and AC
 			{
@@ -210,7 +278,7 @@ void match_instruction(int memory[], int &MAR, int &AC, int &DBUS,
 			// for immediate XOR use MAR and AC
 			if(ABUS == 1)
 			{
-				AC = MAR ^ AC; ///// ask karlson
+				AC = MAR ^ AC; 
 			}
 			else if(ABUS == 0) // for direct use memory at index MAR and AC
 			{
@@ -233,7 +301,7 @@ void match_instruction(int memory[], int &MAR, int &AC, int &DBUS,
 					(instruction == "JP" && AC > 0))) //Jump if the accumulator is positive
 				{
 					IR = memory[MAR];
-					IC = MAR;
+					//IC = MAR;
 				}
 			}
 
@@ -261,6 +329,6 @@ void match_instruction(int memory[], int &MAR, int &AC, int &DBUS,
 void address_error(string mode, ofstream &output)
 {
 	output <<  "Machine Halted - " << mode << " addressing mode.\n";
-	return;
+	exit(0);
 }
 
