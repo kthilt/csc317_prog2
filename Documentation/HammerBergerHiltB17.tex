@@ -56,9 +56,9 @@ Name: \underline{\textbf{#1}}\\ \underline{\textbf{#2}}\\ \underline{\textbf{#3}
 The B17 is a 24-bit word-addressable accumulator architecture.  It supports up to 64 instructions, up to four addressing modes, and 212 (4096) words of memory. Main memory consists of 4,096 words, each of which is 24 bits wide. Addresses are 12 bits wide, and range from 000 through FFF. Within the word, bits are numbered from right to left, with bit 0 the least significant bit and bit 23 the most significant bit. The memory interface transfers one word of data at a time. Communication with memory is via two registers, MAR and MDR. Other locations include IC, ABUS, DBUS three registers, AC, ALU and IR. The B17 uses fixed-length instructions. Instructions have the following format an ADDR a twelve-bit operand address (bits 23-12), a six-bit opcode (bits 11-6), and a six-bit addressing mode (bits 5-0). The b17 uses those bits to determine the instruction to be executed from the instruction set. The program continues to execute instructions untill a halt instruction is found or a halting error occurs.
 
 \subsection{Group Assesment}
-Kevin Hilt: 33\%\\
-Marcus Berger: 34\%\\
-Evan Hammer: 33\%\\
+Kevin Hilt: 35\%\\
+Marcus Berger: 35\%\\
+Evan Hammer: 30\%\\
 
 \subsection{Libraries used}
 Libraries used in this program are :\\
@@ -78,6 +78,17 @@ $\langle iostream \rangle, \langle iomanip \rangle, \langle string \rangle, \lan
 \end{enumerate}
 
 \subsection{Functions and Program Structure:}
+int main(int argc, char\* argv[]) - The main function handles file I/O and output formating for the b17 program.
+
+void get\_address\_mode(int IR, int \&ABUS) - This function pulls out the bits containing the address mode out of the  instruction and sets the ABUS equal to the address mode
+
+void get\_instruction(int IR, string \&instruction) - This function pulls out the bits containing the instruction and sets it equal to a value at an index into an array containing the instruction set.
+
+void hex\_to\_int(string hex\_string, int\& stored\_int) - This function converts a hex number string to an int variable.
+
+void read\_memory(int memory[],  char\* filename) - This function pulls out the bits containing the address mode out of the  instruction and sets the ABUS equal to the address mode
+
+void match\_instruction(int memory[], int \&MAR, int \&AC, int \&DBUS,  int \&ABUS, int \&IR, int \&IC,  ofstream \&output, string instruction) -This function contains the various code to execute each instruction and the if statements to determine which one to do.
 
 \subsubsection{Compiling and Usage:}
 Compile by typing “make b17” in Linux\\
